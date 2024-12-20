@@ -17,8 +17,8 @@ namespace Taboo.Controllers
         }
         [HttpPost]
         public async Task Create(LanguageCreateDto dto)
-        { 
-          await _service.CreateAsync(dto);
+        {
+            await _service.CreateAsync(dto);
         }
         [HttpDelete]
         public async Task<IActionResult> Delete(LanguageDeleteDto dto)
@@ -26,17 +26,17 @@ namespace Taboo.Controllers
             bool result = await _service.DeleteAsync(dto);
             if (result)
             {
-             return Ok();
+                return Ok();
             }
             return NotFound();
         }
         [HttpPut]
         public async Task<IActionResult> Update(LanguageUpdateDto dto)
         {
-            bool result=await _service.UpdateAsync(dto);
-           if (result)
+            bool result = await _service.UpdateAsync(dto);
+            if (result)
             {
-            return Ok();
+                return Ok();
 
             }
             return NotFound();

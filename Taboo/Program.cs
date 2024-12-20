@@ -1,5 +1,8 @@
 
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Taboo.DAL;
 using Taboo.Service.Abstracts;
 using Taboo.Service.Implements;
@@ -12,14 +15,18 @@ namespace Taboo
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+              // Add services to the container.
 
             builder.Services.AddControllers();
             builder.Services.AddDbContext<TaboDbContex>(s => s.UseSqlServer(builder.Configuration.GetConnectionString("MSSql")));
             builder.Services.AddScoped<ILAnguageService, LanguageService>();
+            builder.Services.AddFluentValidationAutoValidation();
+            builder.Services.AddValidatorsFromAssemblyContaining<Program>();
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            
 
             var app = builder.Build();
 
